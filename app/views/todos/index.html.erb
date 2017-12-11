@@ -12,25 +12,29 @@
   </tr>
   <% @todos.each do |todo| %>
   <tr>
-    <% if todo.check_box %>
-      <td>
-        <%= link_to checked_todo_path(todo), method: :patch do %>
-          <span class="glyphicon glyphicon-ok"></span>
-        <% end %>
-      </td>
-    <% else %>
-      <td>
-        <%= link_to checked_todo_path(todo), method: :patch do %>
-          <span class="glyphicon glyphicon-unchecked"></span>
-        <% end %>
-    <% end %>
+      <% if todo.check_box %>
+        <td>
+          <%= link_to checked_todo_path(todo), method: :patch do %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% end %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to checked_todo_path(todo), method: :patch do %>
+            <span class="glyphicon glyphicon-unchecked"></span>
+          <% end %>
+      <% end %>
     </td>
     <td><%= todo.title %></td>
     <td><%= todo.created_at.time.strftime("%Y-%m-%d")%></td>
     <td><%= todo.due_date%></td>
     <td><%= todo.description%></td>
     <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-    <td><%= link_to 'Delete', todo_path(todo), method: :delete, data:{confirm: "Are you sure?"}%></td>
+    <% if Time.now.to_date <= todo.due_date %>
+      <td><%= link_to 'Delete', todo_path(todo), method: :delete, data:{confirm: "Are you sure?"}%></td>
+    <% else %>
+      <td>EXPIRED</td>
+    <% end %>
   </tr>
   <% end %>
 </table>
