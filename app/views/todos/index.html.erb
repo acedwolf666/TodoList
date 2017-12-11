@@ -1,0 +1,37 @@
+<h1> My Todo List</h1>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <td>Status</td>
+    <td>Matter</td>
+    <td>Started from</td>
+    <td>Expired by</td>
+    <td>Note</td>
+    <td>Edit</td>
+    <td>Delete</td>
+  </tr>
+  <% @todos.each do |todo| %>
+  <tr>
+    <% if todo.check_box %>
+      <td>
+        <%= link_to checked_todo_path(todo), method: :patch do %>
+          <span class="glyphicon glyphicon-ok"></span>
+        <% end %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to checked_todo_path(todo), method: :patch do %>
+          <span class="glyphicon glyphicon-unchecked"></span>
+        <% end %>
+    <% end %>
+    </td>
+    <td><%= todo.title %></td>
+    <td><%= todo.created_at.time.strftime("%Y-%m-%d")%></td>
+    <td><%= todo.due_date%></td>
+    <td><%= todo.description%></td>
+    <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+    <td><%= link_to 'Delete', todo_path(todo), method: :delete, data:{confirm: "Are you sure?"}%></td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to 'New Todo', new_todo_path %>
