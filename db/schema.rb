@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120144637) do
+ActiveRecord::Schema.define(version: 20171120074408) do
 
   create_table "todos", force: :cascade do |t|
     t.boolean "check_box"

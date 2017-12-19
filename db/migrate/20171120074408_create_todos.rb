@@ -1,10 +1,10 @@
 class CreateTodos < ActiveRecord::Migration[5.1]
   def change
     create_table :todos do |t|
-      t.string :check_box
+      t.boolean :check_box
       t.string :title
       t.date :date
-      t.integer :due_date
+      t.date :due_date
       t.text :description
 
       t.timestamps
